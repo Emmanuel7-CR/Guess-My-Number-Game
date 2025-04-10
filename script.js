@@ -134,7 +134,7 @@ checkButton.addEventListener("click", function () {
 }); 
 
 // Generate new number 
-function replay() {
+function replay() { 
   document.querySelector(".number").textContent = "?"; 
   document.querySelector(".guess").value = ""; 
   messageDisplay.textContent = "Start Guessing...."; 
@@ -146,21 +146,26 @@ function replay() {
   score = 0; 
   secretNumber = generateSecretNumber(); 
   modal.style.display = "flex"; 
-  closeModalBtn1.addEventListener("click", function() {
-    if (difficultySelected) {
-      closeModal();
-    } else {
+   // Add event listeners to prevent closing modal without selecting difficulty
+  closeModalBtn1.addEventListener("click", preventCloseModal);
+  closeModalBtn2.addEventListener("click", preventCloseModal);
+  window.addEventListener("click", preventCloseModalOutside);
+
+  function preventCloseModal() {
+    if (!difficultySelected) {
       alert("Please select a difficulty level first!");
-    }
-  });
-  closeModalBtn2.addEventListener("click", function() {
-    if (difficultySelected) {
-      closeModal();
     } else {
-      alert("Please select a difficulty level first!");
+      closeModal();
     }
-  });
-  window.addEventListener("click", outsideModal);
+  }
+
+  function preventCloseModalOutside(event) {
+    if (event.target === modal && !difficultySelected) {
+      alert("Please select a difficulty level first!");
+    } else if (event.target === modal && difficultySelected) {
+      closeModal();
+    }
+  }
 }
 
 

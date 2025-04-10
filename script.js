@@ -134,7 +134,7 @@ checkButton.addEventListener("click", function () {
 }); 
 
 // Generate new number 
-function replay() { 
+function replay() {
   document.querySelector(".number").textContent = "?"; 
   document.querySelector(".guess").value = ""; 
   messageDisplay.textContent = "Start Guessing...."; 
@@ -153,8 +153,16 @@ function replay() {
       alert("Please select a difficulty level first!");
     }
   });
-  window.addEventListener("click", outsideModal); 
-} 
+  closeModalBtn2.addEventListener("click", function() {
+    if (difficultySelected) {
+      closeModal();
+    } else {
+      alert("Please select a difficulty level first!");
+    }
+  });
+  window.addEventListener("click", outsideModal);
+}
+
 
 againButton.addEventListener('click', replay);
 

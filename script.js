@@ -134,38 +134,18 @@ checkButton.addEventListener("click", function () {
 }); 
 
 // Generate new number 
-function replay() { 
+function replay() {
   document.querySelector(".number").textContent = "?"; 
-  document.querySelector(".guess").value = ""; 
   messageDisplay.textContent = "Start Guessing...."; 
   document.body.style.backgroundColor = "rgb(34, 34, 34)"; 
-  document.querySelector(".highScore").textContent = "🥇 Highscore: 0"; 
+ document.getElementById('guesses-remaining').textContent = `💯 score: ${maxGuesses}`;
   userInput.value = ""; 
   checkButton.disabled = false; 
   gameOver = false; 
   score = 0; 
   secretNumber = generateSecretNumber(); 
+  difficultySelected = false;
   modal.style.display = "flex"; 
-   // Add event listeners to prevent closing modal without selecting difficulty
-  closeModalBtn1.addEventListener("click", preventCloseModal);
-  closeModalBtn2.addEventListener("click", preventCloseModal);
-  window.addEventListener("click", preventCloseModalOutside);
-
-  function preventCloseModal() {
-    if (!difficultySelected) {
-      alert("Please select a difficulty level first!");
-    } else {
-      closeModal();
-    }
-  }
-
-  function preventCloseModalOutside(event) {
-    if (event.target === modal && !difficultySelected) {
-      alert("Please select a difficulty level first!");
-    } else if (event.target === modal && difficultySelected) {
-      closeModal();
-    }
-  }
 }
 
 
